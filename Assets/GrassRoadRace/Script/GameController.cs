@@ -5,10 +5,5 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject gameController;
-
-	void Awake()
-	{
-		
-	}
+	
 }

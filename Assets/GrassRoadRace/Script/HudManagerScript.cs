@@ -7,8 +7,7 @@ public class HudManagerScript : MonoBehaviour {
 
 	public static HudManagerScript instance = null;
 	public Text	textMoedas;
-	public Text textVidas;
-	public int 	moedas, vidas;
+	public int 	coletavel;
 
 	void Awake()
 	{
@@ -31,28 +30,17 @@ public class HudManagerScript : MonoBehaviour {
 
 	void Start()
 	{
-		moedas = 0;
-		vidas = 3;
-		AtualizarMoedas();
-		AtualizarVidas();
+		coletavel = 0;
+		AtualizarColetavel();
 	}
 
 	// HUD
-	public void AdicionarMoeda(int moedas){
-		this.moedas += moedas;
-		AtualizarMoedas();
+	public void AdicionarColetavel(int moedas){
+		this.coletavel += moedas;
+		AtualizarColetavel();
 	}
 
-	public void AdicionarVida(int vidas){
-		this.vidas += vidas;
-		AtualizarVidas();
-	}
-
-	public void AtualizarMoedas(){
-		textMoedas.text = moedas.ToString();
-	}
-
-	public void AtualizarVidas(){
-		textVidas.text = vidas.ToString();
+	public void AtualizarColetavel(){
+		textMoedas.text = coletavel.ToString();
 	}
 }

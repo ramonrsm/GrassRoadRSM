@@ -68,10 +68,7 @@ public class PlayerMove : MonoBehaviour {
 		switch(other.tag){
 
 			case "Moeda":
-				hudManagerScript.AdicionarMoeda(1);
-			break;
-			case "Vida":
-				hudManagerScript.AdicionarVida(1);
+				hudManagerScript.AdicionarColetavel(1);
 			break;
 		}
 	}
