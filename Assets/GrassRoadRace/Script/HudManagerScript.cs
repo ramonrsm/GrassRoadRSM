@@ -9,18 +9,20 @@ public class HudManagerScript : MonoBehaviour {
 	public Slider sliderFase;
 	public Text	textColetavel;
 	public int 	coletavel;
-	public float posPlayer;
-
-	public float rangeSlider;
+	public float valorSlider;
 
 	void Start()
 	{
-		rangeSlider = finalFase.position.z - inicioFase.position.z;
-		sliderFase.maxValue = rangeSlider;
-		sliderFase.minValue = 0f;
+		sliderFase.maxValue = finalFase.position.z * -1;
+		sliderFase.minValue = inicioFase.position.z;
 
 		coletavel = 0;
 		AtualizarColetavel();
+	}
+
+	void Update()
+	{
+		valorSlider = sliderFase.value;
 	}
 
 	public void AdicionarColetavel(int moedas){
@@ -32,12 +34,7 @@ public class HudManagerScript : MonoBehaviour {
 		textColetavel.text = coletavel.ToString();
 	}
 
-	public void PosicaoAtualSlider(float value){
-		posPlayer += value;
-		AtualizarSlider();
-	}
-
-	public void AtualizarSlider(){
-		this.sliderFase.value += posPlayer;
+	public void AtualizarSlider(float value){
+		this.sliderFase.value = value *-1;
 	}
 }

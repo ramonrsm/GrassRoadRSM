@@ -38,9 +38,6 @@ public class PlayerMove : MonoBehaviour {
 	void FixedUpdate () {
 
 		Move();
-
-		// Atualização posição atual na fase
-		hudManagerScript.PosicaoAtualSlider(transform.position.z);
 	}
 
 	void Move() {
@@ -66,6 +63,9 @@ public class PlayerMove : MonoBehaviour {
 		}else{
 			floor = false;
 		}
+
+		// Atualização posição atual na fase
+		hudManagerScript.AtualizarSlider(transform.position.z);
 	}
 
 	void OnTriggerEnter(Collider other)
