@@ -21,11 +21,12 @@ public class PlayerMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rigidbodyPlayer  = GetComponent<Rigidbody>();
-		//hudManagerScript = hudManagerScript.GetInstance();
+		hudManagerScript = gameController.GetComponent<HudManagerScript>();
 	}
 
 	void Update()
 	{
+		// Movimentação
 		x = Input.GetAxisRaw("Horizontal");
 
 		if(Input.GetButtonDown("Jump") && floor){
@@ -35,7 +36,11 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
 		Move();
+
+		// Atualização posição atual na fase
+		hudManagerScript.PosicaoAtualSlider(transform.position.z);
 	}
 
 	void Move() {
