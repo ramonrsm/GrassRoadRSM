@@ -31,8 +31,8 @@ public class HudManagerScript : MonoBehaviour {
 		valorSlider = sliderFase.value;
 	}
 
-	public void AdicionarColetavel(int moedas){
-		this.coletavel += moedas;
+	public void AdicionarColetavel(int coletavel){
+		this.coletavel += coletavel;
 		AtualizarColetavel();
 	}
 

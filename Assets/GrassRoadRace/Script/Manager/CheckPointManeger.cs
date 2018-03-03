@@ -5,12 +5,9 @@ using UnityEngine;
 public class CheckPointManeger : MonoBehaviour {
 
 	public static CheckPointManeger instance;
-
 	public List<Vector3>	positonCheckPoint;
-	public bool coletado = false;
-
-	public int amountCheckPoint;
 	public int currentCheckPoint = 0;
+	public GameObject	checkPoint;
 
 	void Awake()
 	{
@@ -19,24 +16,19 @@ public class CheckPointManeger : MonoBehaviour {
 
 	void Start()
 	{
-		amountCheckPoint = positonCheckPoint.Count;
+		checkPoint = (GameObject)Instantiate(checkPoint);
+		checkPoint.SetActive(false);
+
+		ActiveCheckPoint();
 	}
 
-	void Update()
-	{
-		if(currentCheckPoint > amountCheckPoint){
-			currentCheckPoint = amountCheckPoint;
-		}
+	public void ActiveCheckPoint(){
 
-		if(coletado == true && currentCheckPoint < amountCheckPoint){
-			AtualizarCheckPoint();
+		if(!checkPoint.activeInHierarchy && currentCheckPoint < positonCheckPoint.Count){
+			checkPoint.transform.position = positonCheckPoint[currentCheckPoint];
+			checkPoint.SetActive(true);
+			currentCheckPoint++;
+			Debug.Log("Check point Atualizado");
 		}
-	}
-
-	public void AtualizarCheckPoint(){
-		Debug.Log("Check point Atualizado");
-		ColetavelManager.instance.GetCheckPointPooledObject(positonCheckPoint[currentCheckPoint]);
-		currentCheckPoint++;
-		coletado = false;
 	}
 }

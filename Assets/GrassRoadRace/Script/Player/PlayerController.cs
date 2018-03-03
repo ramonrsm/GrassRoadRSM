@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+	HudManagerScript hudManager;
+	CheckPointManeger checkPointManeger;
 
+	void Start()
+	{
+		hudManager = HudManagerScript.instance;
+		checkPointManeger = CheckPointManeger.instance;
+	}
 
 	void Update () {
 		// Atualização posição atual na fase
-		HudManagerScript.instance.AtualizarSlider(transform.position.z);
+		hudManager.AtualizarSlider(transform.position.z);
 	}
 
 	
@@ -17,10 +24,10 @@ public class PlayerController : MonoBehaviour {
 		switch(other.tag){
 
 			case "Moeda":
-				HudManagerScript.instance.AdicionarColetavel(1);
+				hudManager.AdicionarColetavel(1);
 			break;
 			case "CheckPoint":
-				CheckPointManeger.instance.coletado = true;
+				checkPointManeger.ActiveCheckPoint();
 			break;
 		}
 	}
