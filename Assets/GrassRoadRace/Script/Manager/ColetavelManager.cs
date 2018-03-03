@@ -7,8 +7,9 @@ public class ColetavelManager : MonoBehaviour {
 
 	public static ColetavelManager instance;
 
-	public List<GameObject> pooledObjects;
+	public List<GameObject> pooledObjectsColetaveis;
 	public GameObject	objectToPool;
+	public GameObject	checkPoint;
 	public int amountToPool;
 
 	void Awake()
@@ -18,32 +19,36 @@ public class ColetavelManager : MonoBehaviour {
 
 	void Start()
 	{
-		pooledObjects = new List<GameObject>();
+		pooledObjectsColetaveis = new List<GameObject>();
 
 		for (int i = 0; i < amountToPool; i++) {
 			GameObject obj = (GameObject)Instantiate(objectToPool);
 			obj.SetActive(false); 
-			pooledObjects.Add(obj);
+			pooledObjectsColetaveis.Add(obj);
 		}
-		distribuirColetaveis("Moeda");
+		distribuirMoedas("Moeda");
+
+		GameObject checkPointObj = (GameObject)Instantiate(checkPoint);
+		checkPointObj.SetActive(false); 
+		pooledObjectsColetaveis.Add(checkPointObj);
 	}
 
 	public GameObject GetPooledObject(string tag) {
 
-		for (int i = 0; i < pooledObjects.Count; i++) {
+		for (int i = 0; i < pooledObjectsColetaveis.Count; i++) {
 			
-			if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag) {
-				return pooledObjects[i];
+			if (!pooledObjectsColetaveis[i].activeInHierarchy && pooledObjectsColetaveis[i].tag == tag) {
+				return pooledObjectsColetaveis[i];
 			}
 		} 
 		return null;
 	}
 
-	public void distribuirColetaveis(string tag){
+	public void distribuirMoedas(string tag){
 
 		int posZ = 0;
 		
-		for(int i = 0; i < pooledObjects.Count; i++){
+		for(int i = 0; i < pooledObjectsColetaveis.Count; i++){
 
             objectToPool = GetPooledObject(tag);
             objectToPool.transform.position = new Vector3(Random.Range(-1, 2), objectToPool.transform.position.y, posZ-1);
@@ -53,5 +58,12 @@ public class ColetavelManager : MonoBehaviour {
             }
             posZ--;
         }
+	}
+
+	public void GetCheckPointPooledObject(Vector3 position){
+
+		objectToPool = GetPooledObject("CheckPoint");
+		objectToPool.transform.position = position;
+		objectToPool.SetActive(true);
 	}
 }

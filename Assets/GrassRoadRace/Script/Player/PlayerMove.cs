@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour {
 
-	public GameObject gameController;
 	private Vector3 vetorInicalDireita, vetorFinalDireita;
 	private Vector3 vetorInicalEsquerda, vetorFinalEsquerda;
 	
@@ -16,12 +15,11 @@ public class PlayerMove : MonoBehaviour {
 	private float x;
 	private Rigidbody rigidbodyPlayer;
 
-	private HudManagerScript hudManagerScript;
+	
 
 	// Use this for initialization
 	void Start () {
 		rigidbodyPlayer  = GetComponent<Rigidbody>();
-		hudManagerScript = gameController.GetComponent<HudManagerScript>();
 	}
 
 	void Update()
@@ -62,19 +60,6 @@ public class PlayerMove : MonoBehaviour {
 			floor = true;
 		}else{
 			floor = false;
-		}
-
-		// Atualização posição atual na fase
-		hudManagerScript.AtualizarSlider(transform.position.z);
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		switch(other.tag){
-
-			case "Moeda":
-				hudManagerScript.AdicionarColetavel(1);
-			break;
 		}
 	}
 }

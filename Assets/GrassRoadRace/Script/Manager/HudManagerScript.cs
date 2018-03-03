@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class HudManagerScript : MonoBehaviour {
 	
+	public static HudManagerScript instance;
 	public Transform inicioFase, finalFase;
 	public Slider sliderFase;
 	public Text	textColetavel;
 	public int 	coletavel;
 	public float valorSlider;
+
+	void Awake()
+	{
+		instance = this;
+	}
 
 	void Start()
 	{
@@ -31,6 +37,7 @@ public class HudManagerScript : MonoBehaviour {
 	}
 
 	public void AtualizarColetavel(){
+		Debug.Log("Moedas Atualizada");
 		textColetavel.text = coletavel.ToString();
 	}
 
