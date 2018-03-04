@@ -7,6 +7,9 @@ public class MoedasManager : MonoBehaviour {
 	public static MoedasManager instance;
 	private PoolObjects poolObjects;
 
+	private HudManagerScript hudManager;
+
+	public int moedas;
 	void Awake()
 	{
 		instance = this;
@@ -14,8 +17,10 @@ public class MoedasManager : MonoBehaviour {
 
 	void Start()
 	{
+		hudManager = HudManagerScript.instance;
 		poolObjects = PoolObjects.instance;
 		distribuirMoedas();
+		AdicionarMoeda(PlayerPrefs.GetInt("Moedas"));
 	}
 
 	public void distribuirMoedas(){
@@ -24,7 +29,7 @@ public class MoedasManager : MonoBehaviour {
 
 		GameObject objectPool = null;
 		
-		for(int i = 0; i < poolObjects.pooledObjects.Count; i++){
+		for(int i = 0; i < poolObjects.pooledMoedasObjects.Count; i++){
 
             objectPool = poolObjects.GetPooledObject("Moeda");
             objectPool.transform.position = new Vector3(Random.Range(-1, 2), objectPool.transform.position.y, posZ-1);
@@ -36,5 +41,11 @@ public class MoedasManager : MonoBehaviour {
         }
 
 		Debug.Log("Moedas distribuidas");
+	}
+
+	public void AdicionarMoeda(int coletavel){
+		PlayerPrefs.SetInt("Moedas", moedas);
+		moedas+=coletavel;
+		hudManager.AtualizarColetavel(moedas);
 	}
 }

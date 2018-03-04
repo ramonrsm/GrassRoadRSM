@@ -6,9 +6,14 @@ using UnityEngine.SceneManagement;
 public class PoolObjects : MonoBehaviour {
 
 	public static PoolObjects instance;
-	public int amountToPool;
-	public List<GameObject> pooledObjects;
-	public GameObject	objectToPool;
+	[Header("Moedas")]
+	public int amountMoedasToPool;
+	public GameObject MoedasToPool;
+	[Header("Obstáculos")]
+	public int amountHurdleToPool;
+	public GameObject HurdleToPool;
+	public List<GameObject> pooledMoedasObjects;
+	
 	void Awake()
 	{
 		instance = this;
@@ -16,21 +21,30 @@ public class PoolObjects : MonoBehaviour {
 
 	void Start()
 	{
-		pooledObjects = new List<GameObject>();
+		pooledMoedasObjects = new List<GameObject>();
 
-		for (int i = 0; i < amountToPool; i++) {
-			GameObject obj = (GameObject)Instantiate(objectToPool);
-			obj.SetActive(false); 
-			pooledObjects.Add(obj);
+		int totalObjectsToPool = amountMoedasToPool + amountHurdleToPool;
+
+		for (int i = 0; i < totalObjectsToPool; i++) {
+
+			if(i <= amountMoedasToPool){
+				GameObject obj = (GameObject)Instantiate(MoedasToPool);
+				obj.SetActive(false);
+				pooledMoedasObjects.Add(obj);
+			}else{
+				GameObject obj = (GameObject)Instantiate(HurdleToPool);
+				obj.SetActive(false);
+				pooledMoedasObjects.Add(obj);
+			}
 		}
 	}
 
 	public GameObject GetPooledObject(string tag) {
 
-		for (int i = 0; i < pooledObjects.Count; i++) {
+		for (int i = 0; i < pooledMoedasObjects.Count; i++) {
 			
-			if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag) {
-				return pooledObjects[i];
+			if (!pooledMoedasObjects[i].activeInHierarchy && pooledMoedasObjects[i].tag == tag) {
+				return pooledMoedasObjects[i];
 			}
 		} 
 		return null;

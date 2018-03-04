@@ -22,26 +22,18 @@ public class HudManagerScript : MonoBehaviour {
 		sliderFase.maxValue = finalFase.position.z * -1;
 		sliderFase.minValue = inicioFase.position.z;
 
-		coletavel = 0;
-		AtualizarColetavel();
+		coletavel = PlayerPrefs.GetInt("Moedas");
 	}
 
 	void Update()
 	{
 		valorSlider = sliderFase.value;
 	}
-
-	public void AdicionarColetavel(int coletavel){
-		this.coletavel += coletavel;
-		AtualizarColetavel();
-	}
-
-	public void AtualizarColetavel(){
-		Debug.Log("Moedas Atualizada");
-		textColetavel.text = coletavel.ToString();
-	}
-
 	public void AtualizarSlider(float value){
 		this.sliderFase.value = value *-1;
+	}
+
+	public void AtualizarColetavel(int coletavel){
+		this.textColetavel.text = coletavel.ToString();
 	}
 }

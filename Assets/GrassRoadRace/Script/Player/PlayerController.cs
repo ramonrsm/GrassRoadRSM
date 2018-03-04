@@ -7,10 +7,15 @@ public class PlayerController : MonoBehaviour {
 	HudManagerScript hudManager;
 	CheckPointManeger checkPointManeger;
 
+	MoedasManager moedasManager;
+
 	void Start()
 	{
-		hudManager = HudManagerScript.instance;
+		hudManager		  = HudManagerScript.instance;
 		checkPointManeger = CheckPointManeger.instance;
+		moedasManager 	  = MoedasManager.instance;
+
+		transform.position = checkPointManeger.carregarPosicao();
 	}
 
 	void Update () {
@@ -24,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 		switch(other.tag){
 
 			case "Moeda":
-				hudManager.AdicionarColetavel(1);
+				moedasManager.AdicionarMoeda(1);
 			break;
 			case "CheckPoint":
 				checkPointManeger.ActiveCheckPoint();
