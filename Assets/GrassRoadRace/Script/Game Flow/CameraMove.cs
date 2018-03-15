@@ -14,7 +14,7 @@ public class CameraMove : MonoBehaviour {
 		Target = GameObject.Find("Player");
 
 		if(Target == null){
-			Debug.Log("Aviso: Adicione o Player ao atributo Target!");
+			Debug.Log("Aviso: Adiciona target para a câmera!");
 			return;
 		}
 	}
@@ -28,12 +28,12 @@ public class CameraMove : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+		/*if (Input.GetKeyDown (KeyCode.Alpha1)) {
 			ChangeView01();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
 			ChangeView02();
-		}
+		}*/
 	}
 
 	void FixedUpdate()
@@ -50,12 +50,12 @@ public class CameraMove : MonoBehaviour {
 		mainCamera.transform.localRotation = Quaternion.Euler ( 19, 180, 0 );
 	}
 
-	void ChangeView02() {
+	/*void ChangeView02() {
 		offset = new Vector3(0, 1f, -6);
 		transform.position = offset;
 		mainCamera.transform.localPosition = new Vector3 ( -8, 2, 0);
 		mainCamera.transform.localRotation = Quaternion.Euler (14, 90, 0);
-	}
+	}*/
 }
 
 

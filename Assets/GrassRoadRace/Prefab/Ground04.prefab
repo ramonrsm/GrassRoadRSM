@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 455628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,9 @@ GameObject:
   - component: {fileID: 455630}
   - component: {fileID: 3355630}
   - component: {fileID: 2355630}
-  m_Layer: 0
+  - component: {fileID: 65457646942684916}
+  - component: {fileID: 65717456192207680}
+  m_Layer: 8
   m_Name: Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +45,7 @@ GameObject:
   - component: {fileID: 3355632}
   - component: {fileID: 2355632}
   - component: {fileID: 6555632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.90625, y: -7.296875, z: 185.00075}
+  m_LocalPosition: {x: -56.90625, y: -7.296875, z: 321.21875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455630}
@@ -196,3 +198,27 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155628}
   m_IsPrefabParent: 1
+--- !u!65 &65457646942684916
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.334317, y: 34.540844, z: 104.27885}
+  m_Center: {x: 79.55145, y: 13.393567, z: 102.432076}
+--- !u!65 &65717456192207680
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.989089, y: 34.540844, z: 104.27885}
+  m_Center: {x: -79.72409, y: 13.393567, z: 102.432076}

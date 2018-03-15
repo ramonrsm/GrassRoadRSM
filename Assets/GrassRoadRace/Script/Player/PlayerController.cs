@@ -5,16 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	HudManagerScript hudManager;
-	CheckPointManeger checkPointManeger;
 	MoedasManager moedasManager;
+	CheckPointManeger checkPointManeger;
 
 	public Transform limiteYPlayer;
 
 	void Start()
 	{
 		hudManager		  = HudManagerScript.instance;
-		checkPointManeger = CheckPointManeger.instance;
 		moedasManager 	  = MoedasManager.instance;
+		checkPointManeger = CheckPointManeger.instance;
+
+		PosicaoSalva();
 	}
 
 	void Update () {
@@ -23,9 +25,7 @@ public class PlayerController : MonoBehaviour {
 		hudManager.AtualizarSlider(transform.position.z);
 
 		// Checar Posicao Y
-		if(transform.position.y < limiteYPlayer.position.y){
-			checkPointManeger.carregarPosicao();
-		}
+		ResetarPosicao();
 	}
 
 	
@@ -37,8 +37,22 @@ public class PlayerController : MonoBehaviour {
 				moedasManager.AdicionarMoeda(1);
 			break;
 			case "CheckPoint":
-				//checkPointManeger.ActiveCheckPoint();
+				checkPointManeger.ActiveCheckPoint();
 			break;
+		}
+	}
+
+	public void ResetarPosicao(){
+		if(transform.position.y <= limiteYPlayer.position.y){
+			transform.position = new Vector3(0,0.51f,0);
+			transform.rotation = Quaternion.Euler ( 0, 0, 0 );
+			PosicaoSalva();
+		}
+	}
+
+	public void PosicaoSalva(){
+		if(checkPointManeger.checkPointAtual > 0){
+			transform.position = checkPointManeger.posCheckPoints[checkPointManeger.checkPointAtual-1];
 		}
 	}
 }

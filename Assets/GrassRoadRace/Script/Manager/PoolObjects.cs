@@ -46,7 +46,6 @@ public class PoolObjects : MonoBehaviour {
 			obj.SetActive(false);
 			pooledObjects.Add(obj);
 		}
-		
 	}
 
 	public List<GameObject> GetPooledObject(string tag) {

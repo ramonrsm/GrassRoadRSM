@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CheckPointManeger : MonoBehaviour {
 
-	private PoolObjects poolObjects;
 	public static CheckPointManeger instance;
-	public List<Vector3>	positonCheckPoint;
-	public int currentCheckPoint;
+
+	private PoolObjects poolObjects;
+	public GameObject checkPoint;
+	public int checkPointAtual = 0;
+
+	public List<Vector3> posCheckPoints;
 
 	void Awake()
 	{
@@ -17,27 +20,39 @@ public class CheckPointManeger : MonoBehaviour {
 	void Start()
 	{
 		poolObjects = PoolObjects.instance;
+		StartCoroutine("MoverCheckPoint");
 	}
 
-	void Update()
-	{
+	public IEnumerator MoverCheckPoint(){
 
+        yield return new WaitUntil(() => poolObjects != null);
+
+		checkPoint = GetCheckPoint();
+
+		for(int i = 0; i < posCheckPoints.Count; i++){
+
+            if(!checkPoint.activeInHierarchy && checkPointAtual < posCheckPoints.Count){
+				checkPoint.transform.position = posCheckPoints[checkPointAtual];
+            	checkPoint.SetActive(true);
+			}
+		}
 	}
 
-	/*public void ActiveCheckPoint(){
+	public GameObject GetCheckPoint(){
 
-		GameObject obj = poolObjects.GetPooledObject("CheckPoint");
+		for(int i = 0; i < poolObjects.pooledObjects.Count; i++){
 
-		if(!obj.activeInHierarchy && currentCheckPoint < positonCheckPoint.Count){
-			obj.transform.position = positonCheckPoint[currentCheckPoint];
-			obj.SetActive(true);
-			currentCheckPoint++;
-			Debug.Log("Check point Atualizado");
-		}		
-	}*/
+            if(!poolObjects.pooledObjects[i].activeInHierarchy && poolObjects.pooledObjects[i].tag == "CheckPoint"){
+				checkPoint = poolObjects.pooledObjects[i];
+			}
+        }
+		return checkPoint;
+	}
 
-	public Vector3 carregarPosicao(){
-		
-		return positonCheckPoint[currentCheckPoint];
+	public void ActiveCheckPoint(){
+		checkPointAtual++;
+		if(checkPointAtual > posCheckPoints.Count-1)
+		checkPointAtual = 0;
+		StartCoroutine("MoverCheckPoint");
 	}
 }
