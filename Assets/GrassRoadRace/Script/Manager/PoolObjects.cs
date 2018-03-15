@@ -7,12 +7,15 @@ public class PoolObjects : MonoBehaviour {
 
 	public static PoolObjects instance;
 	[Header("Moedas")]
-	public int amountMoedasToPool;
-	public GameObject MoedasToPool;
+	public int quantidadeMoedas;
+	public GameObject moedas;
 	[Header("Obstáculos")]
-	public int amountHurdleToPool;
-	public GameObject HurdleToPool;
-	public List<GameObject> pooledMoedasObjects;
+	public int quantidadeObstaculos;
+	public GameObject obstaculos;
+	[Header("CheckPoint")]
+	public GameObject checkPoint;
+
+	public List<GameObject> pooledObjects;
 	
 	void Awake()
 	{
@@ -21,32 +24,41 @@ public class PoolObjects : MonoBehaviour {
 
 	void Start()
 	{
-		pooledMoedasObjects = new List<GameObject>();
-
-		int totalObjectsToPool = amountMoedasToPool + amountHurdleToPool;
-
-		for (int i = 0; i < totalObjectsToPool; i++) {
-
-			if(i <= amountMoedasToPool){
-				GameObject obj = (GameObject)Instantiate(MoedasToPool);
-				obj.SetActive(false);
-				pooledMoedasObjects.Add(obj);
-			}else{
-				GameObject obj = (GameObject)Instantiate(HurdleToPool);
-				obj.SetActive(false);
-				pooledMoedasObjects.Add(obj);
-			}
-		}
+		CriarPoolObjects();
 	}
 
-	public GameObject GetPooledObject(string tag) {
+	private void CriarPoolObjects(){
 
-		for (int i = 0; i < pooledMoedasObjects.Count; i++) {
+		GameObject obj = (GameObject)Instantiate(checkPoint);
+		obj.SetActive(false);
+		pooledObjects.Add(obj);
+
+		for (int i = 0; i < quantidadeMoedas; i++) {
+
+			obj = (GameObject)Instantiate(moedas);
+			obj.SetActive(false);
+			pooledObjects.Add(obj);
+		}
+
+		for (int i = 0; i < quantidadeObstaculos; i++) {
+
+			obj = (GameObject)Instantiate(obstaculos);
+			obj.SetActive(false);
+			pooledObjects.Add(obj);
+		}
+		
+	}
+
+	public List<GameObject> GetPooledObject(string tag) {
+
+		List<GameObject> lista = new List<GameObject>();
+
+		for (int i = 0; i < pooledObjects.Count; i++) {
 			
-			if (!pooledMoedasObjects[i].activeInHierarchy && pooledMoedasObjects[i].tag == tag) {
-				return pooledMoedasObjects[i];
+			if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag) {
+				lista.Add(pooledObjects[i]);
 			}
 		} 
-		return null;
+		return lista;
 	}
 }

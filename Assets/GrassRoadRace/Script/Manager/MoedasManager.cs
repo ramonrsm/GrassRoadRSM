@@ -9,7 +9,8 @@ public class MoedasManager : MonoBehaviour {
 
 	private HudManagerScript hudManager;
 
-	public int moedas;
+	public int moedasAtuais;
+	public int moedasFase;
 	void Awake()
 	{
 		instance = this;
@@ -19,33 +20,26 @@ public class MoedasManager : MonoBehaviour {
 	{
 		hudManager = HudManagerScript.instance;
 		poolObjects = PoolObjects.instance;
-		distribuirMoedas();
-		AdicionarMoeda(PlayerPrefs.GetInt("Moedas"));
 	}
 
-	public void distribuirMoedas(){
+	public List<GameObject> GetMoedas(){
 
-		int posZ = 0;
-
+		List<GameObject> list = new List<GameObject>();
 		GameObject objectPool = null;
-		
-		for(int i = 0; i < poolObjects.pooledMoedasObjects.Count; i++){
 
-            objectPool = poolObjects.GetPooledObject("Moeda");
-            objectPool.transform.position = new Vector3(Random.Range(-1, 2), objectPool.transform.position.y, posZ-1);
+		for(int i = 0; i < poolObjects.pooledObjects.Count; i++){
 
-            if(Random.Range(0, 2) == 1){
-                objectPool.SetActive(true);
-            }
-            posZ--;
+            if(poolObjects.pooledObjects[i].activeInHierarchy && poolObjects.pooledObjects[i].tag == "Moeda"){
+				objectPool = poolObjects.pooledObjects[i];
+				list.Add(objectPool);
+			}
         }
 
-		Debug.Log("Moedas distribuidas");
+		return list;
 	}
 
 	public void AdicionarMoeda(int coletavel){
-		PlayerPrefs.SetInt("Moedas", moedas);
-		moedas+=coletavel;
-		hudManager.AtualizarColetavel(moedas);
+		moedasAtuais+=coletavel;
+		hudManager.AtualizarColetavel(moedasAtuais);
 	}
 }

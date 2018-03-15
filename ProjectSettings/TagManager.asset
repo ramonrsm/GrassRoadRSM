@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Moeda
   - CheckPoint
+  - Obstaculo
   layers:
   - Default
   - TransparentFX

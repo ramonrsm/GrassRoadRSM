@@ -6,21 +6,26 @@ public class PlayerController : MonoBehaviour {
 
 	HudManagerScript hudManager;
 	CheckPointManeger checkPointManeger;
-
 	MoedasManager moedasManager;
+
+	public Transform limiteYPlayer;
 
 	void Start()
 	{
 		hudManager		  = HudManagerScript.instance;
 		checkPointManeger = CheckPointManeger.instance;
 		moedasManager 	  = MoedasManager.instance;
-
-		transform.position = checkPointManeger.carregarPosicao();
 	}
 
 	void Update () {
+
 		// Atualização posição atual na fase
 		hudManager.AtualizarSlider(transform.position.z);
+
+		// Checar Posicao Y
+		if(transform.position.y < limiteYPlayer.position.y){
+			checkPointManeger.carregarPosicao();
+		}
 	}
 
 	
@@ -32,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 				moedasManager.AdicionarMoeda(1);
 			break;
 			case "CheckPoint":
-				checkPointManeger.ActiveCheckPoint();
+				//checkPointManeger.ActiveCheckPoint();
 			break;
 		}
 	}

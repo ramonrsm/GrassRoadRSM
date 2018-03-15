@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class HudManagerScript : MonoBehaviour {
 	
-	public static HudManagerScript instance;
-	public Transform inicioFase, finalFase;
-	public Slider sliderFase;
-	public Text	textColetavel;
-	public int 	coletavel;
-	public float valorSlider;
+	public  static HudManagerScript instance;
+	private GameController gameController;
+	public  Slider 	 sliderFase;
+	public  Text	 textColetavel;
+	private int 	 coletavel;
+	private float 	 valorSlider;
 
 	void Awake()
 	{
@@ -19,10 +19,9 @@ public class HudManagerScript : MonoBehaviour {
 
 	void Start()
 	{
-		sliderFase.maxValue = finalFase.position.z * -1;
-		sliderFase.minValue = inicioFase.position.z;
-
-		coletavel = PlayerPrefs.GetInt("Moedas");
+		gameController = GetComponent<GameController>();
+		sliderFase.maxValue = gameController.finalFase.position.z * -1;
+		sliderFase.minValue = gameController.inicioFase.position.z;
 	}
 
 	void Update()
