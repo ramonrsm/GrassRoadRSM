@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0990a730a284b024c9e4824e9552d99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkPoint: {fileID: 0}
+  checkPoint: {fileID: 1774998324435812, guid: 4bf476df9cfd40d468ebff7cdb885d97, type: 2}
   checkPointAtual: 0
   posCheckPoints:
   - {x: 0, y: 0.51, z: -16}
@@ -380,7 +380,6 @@ MonoBehaviour:
   moedas: {fileID: 1853477777760448, guid: ed1f2e537df485949b85eaf22f85292c, type: 2}
   quantidadeObstaculos: 4
   obstaculos: {fileID: 111844, guid: 532ee50e20554ae4d8287b34e4c6bcb6, type: 2}
-  checkPoint: {fileID: 1774998324435812, guid: 4bf476df9cfd40d468ebff7cdb885d97, type: 2}
   pooledObjects: []
 --- !u!114 &58305326
 MonoBehaviour:
@@ -848,7 +847,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!23 &388561880
 MeshRenderer:
@@ -927,7 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5828aecf35f174ea9c90c090455533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: -2
+  moveSpeed: -5
   forceJump: 300
   floor: 0
   whatIsGround:

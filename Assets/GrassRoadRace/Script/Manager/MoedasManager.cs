@@ -32,8 +32,10 @@ public class MoedasManager : MonoBehaviour {
 
         yield return new WaitUntil(() => poolObjects != null);
 
-		list = GetMoedas();
+		list = poolObjects.GetPooledObject("Moeda");
+
 		GameObject objectPool = null;
+
 		int posXTemp = 0;
 
 		for(int i = 0; i < list.Count; i++){
@@ -48,27 +50,11 @@ public class MoedasManager : MonoBehaviour {
 				}else{
 					posXTemp = 1;
 				}
-				
 				objectPool.transform.position = new Vector3(posXTemp, 1, (i+1) *-1);
             	objectPool.SetActive(true);
 			}
 		}
 		Debug.Log("Moedas distribuidas");
-	}
-
-	public List<GameObject> GetMoedas(){
-
-		list = new List<GameObject>();
-		GameObject objectPool = null;
-
-		for(int i = 0; i < poolObjects.pooledObjects.Count; i++){
-
-            if(!poolObjects.pooledObjects[i].activeInHierarchy && poolObjects.pooledObjects[i].tag == "Moeda"){
-				objectPool = poolObjects.pooledObjects[i];
-				list.Add(objectPool);
-			}
-        }
-		return list;
 	}
 
 	public void AdicionarMoeda(int coletavel){

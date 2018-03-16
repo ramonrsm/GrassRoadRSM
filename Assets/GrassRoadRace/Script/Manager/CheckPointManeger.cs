@@ -5,8 +5,7 @@ using UnityEngine;
 public class CheckPointManeger : MonoBehaviour {
 
 	public static CheckPointManeger instance;
-
-	private PoolObjects poolObjects;
+	[Header("CheckPoint")]
 	public GameObject checkPoint;
 	public int checkPointAtual = 0;
 
@@ -19,15 +18,15 @@ public class CheckPointManeger : MonoBehaviour {
 
 	void Start()
 	{
-		poolObjects = PoolObjects.instance;
+		checkPoint = (GameObject)Instantiate(checkPoint);
+		checkPoint.SetActive(false);
+
 		StartCoroutine("MoverCheckPoint");
 	}
 
 	public IEnumerator MoverCheckPoint(){
 
-        yield return new WaitUntil(() => poolObjects != null);
-
-		checkPoint = GetCheckPoint();
+        yield return new WaitUntil(() => checkPoint != null);
 
 		for(int i = 0; i < posCheckPoints.Count; i++){
 
@@ -36,17 +35,6 @@ public class CheckPointManeger : MonoBehaviour {
             	checkPoint.SetActive(true);
 			}
 		}
-	}
-
-	public GameObject GetCheckPoint(){
-
-		for(int i = 0; i < poolObjects.pooledObjects.Count; i++){
-
-            if(!poolObjects.pooledObjects[i].activeInHierarchy && poolObjects.pooledObjects[i].tag == "CheckPoint"){
-				checkPoint = poolObjects.pooledObjects[i];
-			}
-        }
-		return checkPoint;
 	}
 
 	public void ActiveCheckPoint(){

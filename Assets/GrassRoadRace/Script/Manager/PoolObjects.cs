@@ -12,8 +12,6 @@ public class PoolObjects : MonoBehaviour {
 	[Header("Obstáculos")]
 	public int quantidadeObstaculos;
 	public GameObject obstaculos;
-	[Header("CheckPoint")]
-	public GameObject checkPoint;
 
 	public List<GameObject> pooledObjects;
 	
@@ -29,9 +27,7 @@ public class PoolObjects : MonoBehaviour {
 
 	private void CriarPoolObjects(){
 
-		GameObject obj = (GameObject)Instantiate(checkPoint);
-		obj.SetActive(false);
-		pooledObjects.Add(obj);
+		GameObject obj;
 
 		for (int i = 0; i < quantidadeMoedas; i++) {
 
