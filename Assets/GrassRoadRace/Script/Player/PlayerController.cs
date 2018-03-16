@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour {
 			case "CheckPoint":
 				checkPointManeger.ActiveCheckPoint();
 			break;
+			case "AreaFinal":
+				GetComponent<PlayerMove>().podeMover = false;
+				hudManager.PainelAlerta("Parabéns!!!", "Você completou a fase!", true);
+			break;
 		}
 	}
 

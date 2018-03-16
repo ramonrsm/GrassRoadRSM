@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour {
 	
 	public float moveSpeed = -7;
 	public float forceJump = 300f;
+
+	public bool podeMover = true;
 	public bool floor;
 	public LayerMask	whatIsGround;
 
@@ -35,10 +37,12 @@ public class PlayerMove : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		Move();
+		if(podeMover){
+			Move();
+		}
 	}
 
-	void Move() {
+	public void Move() {
 
 		// MOVE O PLAYER PARA FRENTE
 		float moveAmount = Time.smoothDeltaTime * moveSpeed;
