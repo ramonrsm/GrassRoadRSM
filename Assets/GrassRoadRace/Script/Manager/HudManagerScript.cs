@@ -10,9 +10,7 @@ public class HudManagerScript : MonoBehaviour {
 	public  Text	 textColetavel;
 	private int 	 coletavel;
 	public Transform	inicioFase, finalFase;
-	public GameObject 	painelAlerta;
-	public Text			textTitulo, textoCorpo;
-	public GameObject	iconePainel;
+	public GameObject 	panelWin, panelLose;
 
 	void Awake()
 	{
@@ -21,7 +19,6 @@ public class HudManagerScript : MonoBehaviour {
 
 	void Start()
 	{
-		painelAlerta.SetActive(false);
 		sliderFase.maxValue = finalFase.position.z * -1;
 		sliderFase.minValue = inicioFase.position.z;
 	}
@@ -30,6 +27,7 @@ public class HudManagerScript : MonoBehaviour {
 	{
 		float valorSlider = sliderFase.value;
 	}
+	
 	public void AtualizarSlider(float value){
 		this.sliderFase.value = value *-1;
 	}
@@ -38,13 +36,14 @@ public class HudManagerScript : MonoBehaviour {
 		this.textColetavel.text = coletavel.ToString();
 	}
 
-	public void PainelAlerta(string titulo, string texto){
-		textTitulo.text = titulo;
-		textColetavel.text = texto;
+	public void Win(bool win){
+		if(win){
+			Time.timeScale = (Time.timeScale == 1) ? 0 : 1;
+			panelWin.SetActive(true);
+		}
 	}
-	public void PainelAlerta(string titulo, string texto, bool icon){
-		textTitulo.text = titulo;
-		textColetavel.text = texto;
-		iconePainel.SetActive(icon);
+
+	public void Lose(){
+		
 	}
 }

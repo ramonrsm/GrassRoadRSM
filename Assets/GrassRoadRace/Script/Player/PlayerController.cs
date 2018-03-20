@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 	MoedasManager moedasManager;
 	CheckPointManeger checkPointManeger;
 
+	GameController gameController;
+
 	public Transform limiteYPlayer;
 
 	void Start()
@@ -15,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 		hudManager		  = HudManagerScript.instance;
 		moedasManager 	  = MoedasManager.instance;
 		checkPointManeger = CheckPointManeger.instance;
-
+		gameController 	  = GameController.instance;
 		PosicaoSalva();
 	}
 
@@ -24,8 +26,8 @@ public class PlayerController : MonoBehaviour {
 		// Atualização posição atual na fase
 		hudManager.AtualizarSlider(transform.position.z);
 
-		// Checar Posicao Y
-		ResetarPosicao();
+		// Checar se o player caiu na água.
+		gameController.limitesFase(this.transform, limiteYPlayer);
 	}
 
 	
@@ -40,17 +42,11 @@ public class PlayerController : MonoBehaviour {
 				checkPointManeger.ActiveCheckPoint();
 			break;
 			case "AreaFinal":
-				GetComponent<PlayerMove>().podeMover = false;
-				hudManager.PainelAlerta("Parabéns!!!", "Você completou a fase!", true);
+				//GetComponent<PlayerMove>().podeMover = false;
+				gameController.PausarJogo();
+				
+				//PosicaoSalva();
 			break;
-		}
-	}
-
-	public void ResetarPosicao(){
-		if(transform.position.y <= limiteYPlayer.position.y){
-			transform.position = new Vector3(0,0.51f,0);
-			transform.rotation = Quaternion.Euler ( 0, 0, 0 );
-			PosicaoSalva();
 		}
 	}
 
