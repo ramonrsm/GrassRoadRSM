@@ -15,9 +15,7 @@ public class PlayerMove : MonoBehaviour {
 	public LayerMask	whatIsGround;
 
 	private float x;
-	private Rigidbody rigidbodyPlayer;
-
-	
+	private Rigidbody rigidbodyPlayer;	
 
 	// Use this for initialization
 	void Start () {

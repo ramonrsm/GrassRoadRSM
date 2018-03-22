@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 
 	public Transform limiteYPlayer;
 
+	public bool pauseGame = false;
+
 	void Start()
 	{
 		hudManager		  = HudManagerScript.instance;
@@ -27,7 +29,10 @@ public class PlayerController : MonoBehaviour {
 		hudManager.AtualizarSlider(transform.position.z);
 
 		// Checar se o player caiu na água.
-		gameController.limitesFase(this.transform, limiteYPlayer);
+		if(gameController.PausarJogo()){
+			hudManager.panelLose.SetActive(true);
+		}
+		//gameController.ReposicionarPlayer(this.transform, limiteYPlayer);
 	}
 
 	
@@ -42,16 +47,15 @@ public class PlayerController : MonoBehaviour {
 				checkPointManeger.ActiveCheckPoint();
 			break;
 			case "AreaFinal":
-				//GetComponent<PlayerMove>().podeMover = false;
+				hudManager.panelWin.SetActive(true);
 				gameController.PausarJogo();
-				
-				//PosicaoSalva();
 			break;
 		}
 	}
 
 	public void PosicaoSalva(){
 		if(checkPointManeger.checkPointAtual > 0){
+			pauseGame = true;
 			transform.position = checkPointManeger.posCheckPoints[checkPointManeger.checkPointAtual-1];
 		}
 	}
