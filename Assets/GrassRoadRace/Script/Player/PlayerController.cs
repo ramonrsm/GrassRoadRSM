@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 
 	public float limiteYPlayer;
 
+	public bool pauseGame = false;
+
 	void Start()
 	{
 		hudManager		  = HudManagerScript.instance;
@@ -27,10 +29,18 @@ public class PlayerController : MonoBehaviour {
 		// Atualização posição atual na fase
 		hudManager.AtualizarSlider(transform.position.z);
 
+<<<<<<< HEAD
 		// Checar se o player está abaixo do limite.
 		if(transform.position.y <= limiteYPlayer){
 			PosicaoSalva();
 		}
+=======
+		// Checar se o player caiu na água.
+		if(gameController.PausarJogo()){
+			hudManager.panelLose.SetActive(true);
+		}
+		//gameController.ReposicionarPlayer(this.transform, limiteYPlayer);
+>>>>>>> 64f406a0ac4275db5017892ab7d0db1de2b81e78
 	}
 
 	
@@ -45,14 +55,20 @@ public class PlayerController : MonoBehaviour {
 				checkPointManeger.ActiveCheckPoint();
 			break;
 			case "AreaFinal":
+<<<<<<< HEAD
 				gameController.PausarJogo();
 				//PosicaoSalva();
+=======
+				hudManager.panelWin.SetActive(true);
+				gameController.PausarJogo();
+>>>>>>> 64f406a0ac4275db5017892ab7d0db1de2b81e78
 			break;
 		}
 	}
 
 	public void PosicaoSalva(){
 		if(checkPointManeger.checkPointAtual > 0){
+			pauseGame = true;
 			transform.position = checkPointManeger.posCheckPoints[checkPointManeger.checkPointAtual-1];
 		}
 	}
