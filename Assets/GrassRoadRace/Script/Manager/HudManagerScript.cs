@@ -42,4 +42,8 @@ public class HudManagerScript : MonoBehaviour {
 			panelWin.SetActive(true);
 		}
 	}
+
+	public void Lose(){
+		
+	}
 }
