@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
 	GameController gameController;
 
-	public Transform limiteYPlayer;
+	public float limiteYPlayer;
 
 	void Start()
 	{
@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour {
 		moedasManager 	  = MoedasManager.instance;
 		checkPointManeger = CheckPointManeger.instance;
 		gameController 	  = GameController.instance;
-		PosicaoSalva();
+
+		limiteYPlayer = transform.position.y - 4.5f;
 	}
 
 	void Update () {
@@ -26,8 +27,10 @@ public class PlayerController : MonoBehaviour {
 		// Atualização posição atual na fase
 		hudManager.AtualizarSlider(transform.position.z);
 
-		// Checar se o player caiu na água.
-		gameController.limitesFase(this.transform, limiteYPlayer);
+		// Checar se o player está abaixo do limite.
+		if(transform.position.y <= limiteYPlayer){
+			PosicaoSalva();
+		}
 	}
 
 	
@@ -42,9 +45,7 @@ public class PlayerController : MonoBehaviour {
 				checkPointManeger.ActiveCheckPoint();
 			break;
 			case "AreaFinal":
-				//GetComponent<PlayerMove>().podeMover = false;
 				gameController.PausarJogo();
-				
 				//PosicaoSalva();
 			break;
 		}

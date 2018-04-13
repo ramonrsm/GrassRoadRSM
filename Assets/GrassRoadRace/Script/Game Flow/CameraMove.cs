@@ -9,7 +9,7 @@ public class CameraMove : MonoBehaviour {
 	public float smoothSpeed = 4f;
 	private Vector3 offset;
 
-	void Awake()
+	/*void Awake()
 	{
 		Target = GameObject.Find("Player");
 
@@ -17,7 +17,7 @@ public class CameraMove : MonoBehaviour {
 			Debug.Log("Aviso: Adiciona target para a câmera!");
 			return;
 		}
-	}
+	}*/
 
 	// Use this for initialization
 	void Start () {

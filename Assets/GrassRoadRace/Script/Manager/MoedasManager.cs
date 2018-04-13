@@ -54,7 +54,7 @@ public class MoedasManager : MonoBehaviour {
             	objectPool.SetActive(true);
 			}
 		}
-		Debug.Log("Moedas distribuidas");
+		//Debug.Log("Moedas distribuidas");
 	}
 
 	public void AdicionarMoeda(int coletavel){

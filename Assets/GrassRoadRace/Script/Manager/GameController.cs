@@ -11,11 +11,9 @@ public class GameController : MonoBehaviour {
         instance = this;
     }
 
-    public void limitesFase(Transform target, Transform limite){
-		if(target.transform.position.y <= limite.position.y){
-			target.transform.position = new Vector3(0,0.51f,0);
-			target.transform.rotation = Quaternion.Euler ( 0, 0, 0 );
-		}
+    public bool Morreu(Transform target, Transform limite){
+
+        return target.transform.position.y <= limite.position.y;
 	}
 
     public void PausarJogo(){

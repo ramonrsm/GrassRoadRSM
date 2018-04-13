@@ -39,8 +39,11 @@ public class CheckPointManeger : MonoBehaviour {
 
 	public void ActiveCheckPoint(){
 		checkPointAtual++;
-		if(checkPointAtual > posCheckPoints.Count-1)
-		checkPointAtual = 0;
+		
+		if(checkPointAtual > posCheckPoints.Count-1){
+			checkPointAtual = 0;
+		}
+		
 		StartCoroutine("MoverCheckPoint");
 	}
 }
