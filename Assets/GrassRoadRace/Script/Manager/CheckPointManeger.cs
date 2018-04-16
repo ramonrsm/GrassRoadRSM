@@ -6,6 +6,8 @@ public class CheckPointManeger : MonoBehaviour {
 
 	public static CheckPointManeger instance;
 	[Header("CheckPoint")]
+
+	public GameObject Player;
 	public GameObject checkPoint;
 	public int checkPointAtual = 0;
 
@@ -21,29 +23,48 @@ public class CheckPointManeger : MonoBehaviour {
 		checkPoint = (GameObject)Instantiate(checkPoint);
 		checkPoint.SetActive(false);
 
-		StartCoroutine("MoverCheckPoint");
+		StartCoroutine("InicializarCheckPoints");
 	}
 
-	public IEnumerator MoverCheckPoint(){
+	public void ReposicionarPlayer(){
+		if(checkPointAtual == 0){
+			Player.transform.position = Vector3.zero;
+		}else{
+			Player.transform.position = posCheckPoints[checkPointAtual-1];
+		}
+	}
 
-        yield return new WaitUntil(() => checkPoint != null);
+	public void ActiveCheckPoint(){
+
+		checkPointAtual++;
+		MoverCheckPoints(checkPointAtual);
+	}
+
+	private void MoverCheckPoints(int pos){
+
+		if(pos >= posCheckPoints.Count){
+			pos = 0;
+		}
 
 		for(int i = 0; i < posCheckPoints.Count; i++){
 
-            if(!checkPoint.activeInHierarchy && checkPointAtual < posCheckPoints.Count){
-				checkPoint.transform.position = posCheckPoints[checkPointAtual];
+            if(!checkPoint.activeInHierarchy){
+				checkPoint.transform.position = posCheckPoints[pos];
             	checkPoint.SetActive(true);
 			}
 		}
 	}
 
-	public void ActiveCheckPoint(){
-		checkPointAtual++;
-		
-		if(checkPointAtual > posCheckPoints.Count-1){
-			checkPointAtual = 0;
+	public IEnumerator InicializarCheckPoints(){
+
+        yield return new WaitUntil(() => checkPoint != null);
+
+		for(int i = 0; i < posCheckPoints.Count; i++){
+
+            if(!checkPoint.activeInHierarchy){
+				checkPoint.transform.position = posCheckPoints[i];
+            	checkPoint.SetActive(true);
+			}
 		}
-		
-		StartCoroutine("MoverCheckPoint");
 	}
 }
