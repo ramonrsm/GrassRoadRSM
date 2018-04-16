@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour {
 	HudManagerScript hudManager;
 	MoedasManager moedasManager;
 	CheckPointManeger checkPointManeger;
-
 	GameController gameController;
 
 	public Transform limiteY;
@@ -42,7 +41,7 @@ public class PlayerController : MonoBehaviour {
 				checkPointManeger.ActiveCheckPoint();
 			break;
 			case "AreaFinal":
-
+				hudManager.Win(true);
 			break;
 		}
 	}

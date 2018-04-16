@@ -39,11 +39,20 @@ public class HudManagerScript : MonoBehaviour {
 	public void Win(bool win){
 		if(win){
 			Time.timeScale = (Time.timeScale == 1) ? 0 : 1;
-			panelWin.SetActive(true);
+			panelWin.SetActive(win);
+		}else{
+			Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
+			panelWin.SetActive(win);
 		}
 	}
 
-	public void Lose(){
-		
+	public void Lose(bool lose){
+		if(lose){
+			Time.timeScale = (Time.timeScale == 1) ? 0 : 1;
+			panelLose.SetActive(lose);
+		}else{
+			Time.timeScale = (Time.timeScale == 0) ? 1 : 0;
+			panelLose.SetActive(lose);
+		}
 	}
 }
